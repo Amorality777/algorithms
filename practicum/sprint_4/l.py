@@ -1,6 +1,10 @@
 import sys
 
 
+def gen_hash(seq: str) -> int:
+    ...
+
+
 def main():
     n, k = input().split()
     n = int(n)

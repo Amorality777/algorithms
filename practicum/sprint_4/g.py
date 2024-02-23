@@ -5,18 +5,23 @@ def main():
     input()
     seq = sys.stdin.readline().rstrip().split()
     match = {'0': -1, '1': 1}
-    infos = []
-    results = set()
-    for value in seq:
-        value = match[value]
-        for j, info in enumerate(infos):
-            info = (info[0] + value, info[1] + 1)
-            if info[0] == 0:
-                results.add(info[1])
-            infos[j] = info
-        infos.append((value, 1))
+    max_len = len(seq)
+    result = sum(match[value] for value in seq)
+    l = 0
+    r = len(seq) - 1
+    exp = '1' if result < 0 else '0'
+    while l != r:
+        if result == 0:
+            return max_len
+        if seq[l] == exp:
+            result -= match[exp]
+            l += 1
+        else:
+            result -= match[seq[r]]
+            r -= 1
+        max_len -= 1
 
-    return max(results) if results else 0
+    return 0
 
 
 print(main())
